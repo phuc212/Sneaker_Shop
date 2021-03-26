@@ -1,0 +1,52 @@
+﻿@model List<Orders>
+@inject AppDbContext context;
+@inject UserManager<AppIdentityUser> userManager;
+@{
+    List<OrderDtail> orderDetails = context.orderDtails.ToList();
+
+}
+<table id="OrderIndex" class="table table-striped table-bordered" style="width:100%">
+    <thead class="thead-dark" style="text-align:center">
+        <tr>
+
+            <th>dia chi </th>
+            <th>Ngày giao hàng</th>
+            <th>Danh sách sản phẩm</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody style="text-align:center">
+        @foreach (var item in Model)
+        {
+            <tr style="text-align:center">
+
+
+
+                <td>@item.ShipAddress</td>
+                <td>@item.ShippedDate</td>
+                <td>
+                    <a asp-controller="OrderDetail" asp-action="WatchOrderDetail" asp-route-id="@item.OderId">
+                        @orderDetails.FindAll(el => el.OderId == item.OderId).Count Sản Phẩm
+                    </a>
+                </td>
+                <td>
+                    <a href="javascript:void(0)" class="text-danger" onclick="Order.delete(@item.OderId)">Delete</a>|
+                    <a asp-controller="Order" asp-action="Edit" asp-route-id="@item.OderId">Pay</a>|
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot style="text-align:center">
+        <tr>
+
+            <th>dia chi</th>
+            <th>Ngày giao hàng</th>
+            <th>Danh sách sản phẩm</th>
+            <th>Action</th>
+        </tr>
+    </tfoot>
+</table>
+@section Scripts{
+
+    <script src="~/jsthem/oder.js"  asp-append-version="true"></script>
+}

@@ -1,0 +1,180 @@
+﻿@{
+    ViewBag.Title = "Register member";
+    Layout = null;
+}
+@model RegisterViewModel
+<!DOCTYPE html>
+<html>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+/* Change styles for cancel button and signup button on extra small screens */
+    @*@media screen and (max-width: 300px) {
+      .cancelbtn, .signupbtn {
+         width: 100%;
+      }
+    }*@
+</style>
+@*<body>
+
+    <form asp-controller="Account" asp-action="Register" method="post" style="border:1px solid #ccc">
+        <div class="container">
+            <h1>Sign Up</h1>
+            <p>Please fill in this form to create an account.</p>
+            <hr>
+
+            <label asp-for="Email"><b>Email</b></label>
+            <input class="au-input au-input--full" asp-for="Email" placeholder="Email">
+
+            <label asp-for="FullName"><b>Full Name</b></label>
+            <input class="au-input au-input--full" asp-for="FullName" placeholder="FullName">
+
+
+            <label asp-for="Password"><b>Password</b></label>
+            <input class="au-input au-input--full" asp-for="Password" placeholder="Password">
+
+            <label asp-for="ConfirmPassword"><b>Repeat Password</b></label>
+            <input class="au-input au-input--full" asp-for="ConfirmPassword" placeholder="Password">
+
+            <label asp-for="Address"><b>Address</b></label>
+            <input class="au-input au-input--full" asp-for="Address" placeholder="Address">
+
+            <label>
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+            </label>
+
+            <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+            <div class="clearfix">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <button type="submit" class="signupbtn" asp-controller="Account" asp-action="Register">Sign Up</button>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>*@
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>sign up form by colorlib</title>
+
+     font icon 
+    <link rel="stylesheet" href="~/register/fonts/material-icon/css/material-design-iconic-font.min.css">
+     main css 
+    <link rel="stylesheet" href="~/register/css/style.css">
+</head>
+<body>
+
+    <div class="main">
+
+        <section class="signup">
+             <img src="images/signup-bg.jpg" alt=""> 
+            <div class="container">
+                <div class="signup-content">
+                    <form asp-controller="Account" asp-action="Register" method="post" id="signup-form" class="signup-form">
+                        <h1>Sign Up</h1>
+
+                        <label asp-for="Email"><b>Email</b></label>
+                        @*<input class="au-input au-input--full" asp-for="Email" placeholder="Email">*@
+                        <input type="email" class="form-input" name="email" id="email" placeholder="Your Email" />
+
+
+                        <label asp-for="FullName"><b>Full Name</b></label>
+                        <input class="au-input au-input--full" asp-for="FullName" placeholder="FullName">
+
+
+                        <label asp-for="Password"><b>Password</b></label>
+                        <input class="au-input au-input--full" asp-for="Password" placeholder="Password">
+
+                        <label asp-for="ConfirmPassword"><b>Repeat Password</b></label>
+                        <input class="au-input au-input--full" asp-for="ConfirmPassword" placeholder="Password">
+
+                        <label asp-for="Address"><b>Address</b></label>
+                        <input class="au-input au-input--full" asp-for="Address" placeholder="Address">
+
+                        <div class="form-group">
+                            <input type="submit" asp-controller="Account" asp-action="register" name="submit" id="submit" class="form-submit" value="sign up" />
+                        </div>
+
+                    </form>
+                    <p class="loginhere">
+                        have already an account ? <a href="#" class="loginhere-link">login here</a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+     js 
+    <script src="~/register/vendor/jquery/jquery.min.js"></script>
+    <script src="~/register/js/main.js"></script>
+</body> this templates was made by colorlib (https://colorlib.com) 
+</html>

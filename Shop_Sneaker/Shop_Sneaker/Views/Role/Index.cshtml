@@ -1,0 +1,72 @@
+﻿@model IEnumerable<RoleModel>
+@{
+    ViewBag.Title = "Role managerment";
+}
+<h3>@ViewBag.Title</h3>
+<a asp-controller="Role" asp-action="Create" class="btn btn-warning">Create Role</a>
+<table class="table table-bordered table-hover mt-2">
+    <thead class="text-dark">
+        <tr>
+            <th>Id</th>
+            <th>Role Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var role in Model)
+            {
+        <tr>
+            <td>@role.RoleId</td>
+            <td>@role.RoleName</td>
+
+            <td>
+                <a asp-controller="Role" asp-action="Edit" asp-route-id="@role.RoleId" class="btn btn-warning"> Edit</a>
+                @*<a onclick="removeRole('@role.RoleId')" class="btn btn-danger">Delete</a>*@
+            </td>
+        </tr>
+                
+
+            }
+        }
+    </tbody>
+</table>
+
+
+
+
+@section Scripts
+ {
+
+    <script src="~/lib/bootbox.js/bootbox.min.js"></script>
+    <script>
+        function removeRole(RoleId) {
+                bootbox.confirm({
+                    title: "Remove cart item?",
+                    message: "Do you want to remove this item on cart.",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> No'
+                        },
+                        confirm: {
+                            label: '<i class="fa fa-check"></i> Yes'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            $.ajax({
+                                type: "GET",
+                                url:`/Role/Delete/${Id}`,
+                                success: function (result) {
+                                    alert("done")
+                                    window.location.href = "@Url.RouteUrl("Index")";
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+    </script>
+}
+

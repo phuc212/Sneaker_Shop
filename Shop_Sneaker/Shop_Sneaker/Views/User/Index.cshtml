@@ -1,0 +1,76 @@
+﻿@model IEnumerable<UserModel>
+@{
+    ViewBag.Title = "User managerment";
+ 
+}
+<h3>@ViewBag.Title</h3>
+<a asp-controller="User" asp-action="Create" class="btn btn-warning">Create User</a>
+<table class="table table-bordered table-hover mt-2">
+    <thead class="text-dark">
+        <tr>
+            <th>User Name</th>
+            <th>Address</th>
+            <th>Role Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var role in Model)
+            {
+                <tr>
+                    <td>@role.FullName</td>
+                    <td style="width:500px;">@role.Address</td>
+                    <td style="width:110px">@role.RoleName</td>
+                    <td style="width:300px;">@role.Email</td>
+                    <td>
+                        <a style="width:50px" asp-controller="User" asp-action="Edit" asp-route-id="@role.UserId" class="btn btn-warning"> Edit</a>
+                        @*<a onclick="removeRole('@role.UserId')" class="btn btn-danger">Delete</a>*@
+                    </td>
+                </tr>
+
+
+            }
+        }
+    </tbody>
+</table>
+
+
+
+
+@section Scripts
+ {
+
+    <script src="~/lib/bootbox.js/bootbox.min.js"></script>
+    <script>
+        function removeRole(UserId) {
+                bootbox.confirm({
+                    title: "Remove cart item?",
+                    message: "Do you want to remove this item on cart.",
+                    buttons: {
+                        cancel: {
+                            label: '<i class="fa fa-times"></i> No'
+                        },
+                        confirm: {
+                            label: '<i class="fa fa-check"></i> Yes'
+                        }
+                    },
+                    callback: function (UserId) {
+                        if (result) {
+                            $.ajax({
+                                type: "GET",
+                                url: `/User/Delete/${UserId}`,
+                                success: function (result) {
+                                    alert("done")
+                                    window.location.href = "@Url.RouteUrl("UserIndex")";
+                                }
+                            });
+                        }
+                    }
+                });
+            }
+    </script>
+}
+

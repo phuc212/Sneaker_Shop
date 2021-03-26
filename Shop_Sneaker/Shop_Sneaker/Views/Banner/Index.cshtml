@@ -1,0 +1,85 @@
+﻿@inject AppDbContext context;
+@model List<BannerViewModel>
+@{
+    ViewBag.Title = "Chương trình Banner";
+    var categories = ViewBag.Categories as List<Banner>;
+
+}
+<div class="container-fluid">
+    <div class="card-header row py-3">
+        <div>
+            <h3 class="m-0 font-weight-bold text-primary">@ViewBag.Title</h3>
+        </div>
+        <div class="ml-md-auto" style="padding-right:30px">
+            <a asp-controller="Banner" asp-action="Create" class="btn btn-warning" style="width:150px"><i class="fas fa-plus-square"></i>  Tạo mới</a>
+        </div>
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead style="text-align:center">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Banner</th>
+                        <th scope="col">photo</th>
+                        <th scope="col">Công cụ</th>
+                    </tr>
+                </thead>
+                <tbody style="text-align:center">
+                    @foreach (var item in Model)
+                    {
+
+                        <tr class="fo">
+                            <td scope="row" id="idcate">@item.BannerId</td>
+                            <td scope="col">@item.BannerName</td>
+                            <td><img src="@Url.Content($"~/images/Banner/{@item.BannerPhoto}")" alt="Alternate Text" style="height:150px" /></td>
+
+                            
+                            <td>
+
+                                <a type="button" class="btn btn-primary" asp-controller="Banner" asp-action="Edit" asp-route-id="@item.BannerId">
+                                    Edit
+                                </a>
+                                @*<a type="button" class="btn btn-success" asp-controller="Product" asp-action="ProductbyCategory" asp-route-id="@item.CategoryId">
+                                        Detail
+                                    </a>*@
+
+                                @*<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#@($"exampleModalLong{@item.CategoryId}")">
+                                        Delete
+                                    </button>*@
+                                <div class="modal fade" id="@($"exampleModalLong{@item.BannerId}")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Xóa @item.BannerName?</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Bạn chắc chứ?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                                <a type="button" class="btn btn-danger" asp-controller="Banner" asp-action="Delete" asp-route-id="@item.BannerId">Xóa</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+﻿@model Edit
+@{
+    ViewBag.Title = "Cập nhật";
+}
+<h3 class="m-0 font-weight-bold text-primary mb-5">@ViewBag.Title</h3>
+<form enctype="multipart/form-data" asp-controller="Banner" asp-action="Edit" method="post">
+    <div class="row form-group">
+        <input hidden asp-for="BannerId" value="@Model.BannerId" />
+        <input hidden asp-for="BannerPhoto" value="@Model.BannerPhoto" />
+    </div>
+
+    <div class="row form-group">
+        <div class="col-sm-2">
+            <label asp-for="BannerName"></label>
+        </div>
+        <div class="col-sm-10">
+            <input asp-for="BannerName" class="form-control" />
+            <span asp-validation-for="BannerName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="col-sm-2">
+            <label asp-for="BannerImage"></label>
+        </div>
+        <div class="col-sm-10">
+            <div class="custom-file">
+                <input class="custom-file-input" asp-for="BannerImage">
+                <label class="custom-file-label" for="customFile"></label>
+                <span asp-validation-for="BannerImage" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-left: 200px;" asp-validation-summary="All" class="text-danger"></div>
+    <div class="row form-group justify-content-center">
+        <button type="submit" class="btn btn-primary form-group mr-5">Cập nhật</button>
+        <a asp-controller="Banner" asp-action="Index" class="btn btn-warning form-group">Trở lại</a>
+    </div>
+
+</form>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                $("#avatar").attr("src", window.URL.createObjectURL($(this)[0].files[0]));
+            });
+        });
+    </script>
+}
+
